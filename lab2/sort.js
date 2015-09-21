@@ -7,14 +7,16 @@
 
 /* PART 1 */
 
-function lastLetterSort(stringArray) {
+function getLastLetter(s) {
+  return s.slice(-1);
+}
 
-  stringArray.sort(function(a, b){
-    //TODO: implement me. sort the strings in alphabetical
-    // order using their last letter
-    // read this: http://www.w3schools.com/jsref/jsref_sort.asp
-  });
+assert(getLastLetter("hello") === "o", "getLastLetter is not getting the last letter")
 
+function lastLetterSort(stringArray){
+   stringArray.sort(function(a, b){
+     return (getLastLetter(a) - getLastLetter(b));
+   });
 }
 
 assertDeepEqual(
@@ -26,27 +28,28 @@ assertDeepEqual(
 
 /* PART 2 */
 
-var arrayOfArrays = [ [ 1, 4, 3 ], [ 6, 2, 3 ], [ 3, 9 ], [ 0, 1 ] ]
+var arrayOfArrays = [ [ 1, 4, 3 ], [ 6, 2, 3 ], [ 3, 9 ], [ 0, 1 ] ];
 
 function sumArray(numberArray) {
   var sum = 0;
-  // TODO: implement me using forEach
+  numberArray.forEach(function(entry){
+  sum += entry
+  });
   return sum;
 }
 
+
 function sumSort(arrayOfArrays) {
   arrayOfArrays.sort(function(a, b) {
-    // TODO: implement me using sumArray
-    //  order the arrays based on the sum of the numbers
-    //  inside each array
+    return sumArray(a) - sumArray(b);
   });
 }
 
-// write an assertion that tests the above code
+// 2 assertions that test the above code
+assert(sumArray(arrayOfArrays[0]) < sumArray(arrayOfArrays[1]), 
+  "arrays not sorted by sum");
 
-
-
-
+assert(sumArray([1, 2, 3]) === 6, "sumArray is not summing elements correctly");
 
 // assert methods //
 
@@ -58,7 +61,7 @@ function assert(expression, failureMessage) {
   }
 }
 
-// Use this method to test to arrays when they are not
+// Use this method to test two arrays when they are not
 // the same arrays but content should be equal
 function assertDeepEqual(actual, expected, failureMessage) {
   try {
