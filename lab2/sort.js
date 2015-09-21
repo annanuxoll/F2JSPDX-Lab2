@@ -13,9 +13,14 @@ function getLastLetter(s) {
 
 assert(getLastLetter("hello") === "o", "getLastLetter is not getting the last letter")
 
+// this doesn't work but I don't know why
 function lastLetterSort(stringArray){
    stringArray.sort(function(a, b){
-     return (getLastLetter(a) - getLastLetter(b));
+      if ( getLastLetter(a) < getLastLetter(b) ) return -1;
+      // return 0 if a and b are the same
+      if ( getLastLetter(a) === getLastLetter(b) ) return 0;
+      // return 1 if a is after b
+      if ( getLastLetter(a) > getLastLetter(b) ) return 1;
    });
 }
 
