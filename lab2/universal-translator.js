@@ -16,8 +16,6 @@ var hello = {
 function SentientBeing ( homePlanet, language ) {
   this.homePlanet = homePlanet;
   this.language = language;
-  // TODO: specify a home planet and a language
-  // you'll need to add parameters to this constructor
 }
 
 // sb is a SentientBeing object
@@ -39,16 +37,49 @@ Human.prototype = Object.create( SentientBeing.prototype );
 Human.prototype.constructor = Human;
 /* this is the end of Human subclass */
 
-var human = new Human();
+
 
 // TODO: create three subclasses of SentientBeing, one for each
 // species above (Klingon, Human, Romulan).
 
+/*Klingon subclass */
+function Klingon () {
+  SentientBeing.call( this, 'Qo"noS', 'klingon' );
+}
+Klingon.prototype = Object.create( SentientBeing.prototype );
+Klingon.prototype.constructor = Klingon;
+
+/*Romulan subclass*/
+function Romulan () {
+  SentientBeing.call( this, 'Romulus', 'romulan');
+}
+Romulan.prototype = Object.create( SentientBeing.prototype );
+Romulan.prototype.constructor = Romulan;
+
+//make a human, a klingon, and a romulan
+var human = new Human();
+var klingon = new Klingon();
+var romulan = new Romulan();
+
+//Assertions
+
 assert( human.sayHello(new Klingon()) === "nuqneH",
   "the klingon should hear nuqneH");
-// TODO: write five more assertions, to complete all the possible
-// greetings between the three types of sentient beings you created above.
 
+assert( human.sayHello(new Romulan()) === "Jolan\"tru",
+  "the romulan should hear Jolan\"tru");
+
+assert( klingon.sayHello(new Human()) === "hello",
+  "the human should hear hello");
+
+assert( klingon.sayHello(new Romulan()) === "Jolan\"tru",
+  "the romulan should hear Jolan\"tru");
+
+assert( romulan.sayHello(new Human()) === "hello",
+  "the human should hear hello");
+
+assert( romulan.sayHello(new Klingon()) === "nuqneH",
+  "the klingon should hear nuqneH");
 
 
 /* helper method for assertions */
